@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CSV/Excel Chart Generator</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header class="page-header">
+      <a href="../index.html" class="back-btn">← Home</a>
+      <h1>📈 CSV/Excel Chart Generator</h1>
+    </header>
+
+    <main class="layout">
+      <!-- Controls -->
+      <section class="controls">
+        <div class="card upload-card">
+          <h2>1. Load Data</h2>
+          <p class="hint">Drop a .csv / .xlsx / .xls file or click to browse</p>
+
+          <label class="dropzone" id="dropzone">
+            <input type="file" id="fileInput" accept=".csv,.xlsx,.xls" hidden />
+            <div class="drop-content">
+              <span class="icon">📁</span>
+              <span class="text">Click to choose file or drop it here</span>
+              <span class="subtext" id="fileInfo">No file selected</span>
+            </div>
+          </label>
+        </div>
+
+        <div class="card config-card">
+          <h2>2. Configure Chart</h2>
+
+          <div class="field">
+            <label for="chartType">Chart type</label>
+            <select id="chartType">
+              <option value="line">Line</option>
+              <option value="bar">Bar</option>
+              <option value="area">Area</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="xColumn">X-axis column</label>
+            <select id="xColumn" disabled>
+              <option value="">Load a file first</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Y-series columns</label>
+            <div id="yColumns" class="y-columns-placeholder">
+              Load a file to choose columns
+            </div>
+          </div>
+
+          <div class="field inline">
+            <label>
+              <input type="checkbox" id="firstRowHeader" checked />
+              First row is header
+            </label>
+          </div>
+
+          <div class="field inline">
+            <label>
+              <input type="checkbox" id="treatAsNumber" checked />
+              Treat values as numbers
+            </label>
+          </div>
+
+          <div class="buttons">
+            <button id="generateBtn" class="btn-primary" disabled>Generate Chart</button>
+            <button id="resetBtn" class="btn-clear">Reset</button>
+          </div>
+
+          <div id="summary" class="summary"></div>
+        </div>
+      </section>
+
+      <!-- Chart -->
+      <section class="chart-section card">
+        <h2>3. Preview</h2>
+        <div id="chart" class="chart-container">
+          <p class="chart-placeholder">
+            Load a CSV/Excel file and configure columns to see the chart.
+          </p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

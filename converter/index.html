@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Embedded Data Converter</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="container">
+    <header class="page-header">
+      <a href="../index.html" class="back-btn">← Home</a>
+      <h1>🔄 Embedded Data Converter</h1>
+    </header>
+
+    <main class="grid">
+      <!-- Decimal -->
+      <section class="card">
+        <h2>Decimal (uint8_t)</h2>
+        <p class="hint">Example: <code>10 20 30</code> or <code>10,20,30</code></p>
+        <textarea id="decArea" spellcheck="false"></textarea>
+        <button id="decConvert" class="btn-primary">Convert from Decimal</button>
+      </section>
+
+      <!-- Hex -->
+      <section class="card">
+        <h2>Hex</h2>
+        <p class="hint">Example: <code>FF 01 0A</code> or <code>0xFF, 0x01, 0x0A</code></p>
+        <textarea id="hexArea" spellcheck="false"></textarea>
+        <button id="hexConvert" class="btn-primary">Convert from Hex</button>
+      </section>
+
+      <!-- Binary -->
+      <section class="card">
+        <h2>Binary</h2>
+        <p class="hint">Example: <code>11111111 00000001</code> or <code>0b11111111</code></p>
+        <textarea id="binArea" spellcheck="false"></textarea>
+        <button id="binConvert" class="btn-primary">Convert from Binary</button>
+      </section>
+
+      <!-- ASCII -->
+      <section class="card">
+        <h2>ASCII</h2>
+        <p class="hint">Example: <code>HELLO</code></p>
+        <textarea id="asciiArea" spellcheck="false"></textarea>
+        <button id="asciiConvert" class="btn-primary">Convert from ASCII</button>
+      </section>
+
+      <!-- CRC -->
+      <section class="card crc-card">
+        <h2>CRC-8 (Decimal)</h2>
+        <p class="hint">Computed over current bytes (poly 0x07, init 0x00)</p>
+        <textarea id="crcArea" spellcheck="false" readonly></textarea>
+        <div class="crc-actions">
+          <button id="copyAll" class="btn-secondary">📋 Copy All Fields</button>
+          <button id="clearAll" class="btn-clear">🗑 Clear All</button>
+        </div>
+      </section>
+
+            <!-- Advanced Views -->
+      <!-- <section class="card advanced-card">
+        <h2>Advanced Views</h2>
+        <p class="hint">Multi-byte, signed, bits, and C array from current bytes</p>
+
+        <div class="adv-group">
+          <h3>Unsigned</h3>
+          <pre id="uView" class="adv-pre" readonly></pre>
+        </div>
+
+        <div class="adv-group">
+          <h3>Signed</h3>
+          <pre id="sView" class="adv-pre" readonly></pre>
+        </div>
+
+        <div class="adv-group">
+          <h3>Bits</h3>
+          <pre id="bitView" class="adv-pre" readonly></pre>
+        </div>
+
+        <div class="adv-group">
+          <h3>C uint8_t array</h3>
+          <pre id="cArrayView" class="adv-pre" readonly></pre>
+          <button id="copyCArray" class="btn-secondary">📋 Copy C Array</button>
+        </div>
+      </section> -->
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

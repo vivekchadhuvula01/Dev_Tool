@@ -1,0 +1,251 @@
+/* ========================================
+   DESIGN SYSTEM - CYAN + MAGENTA 
+   PREMIUM DARK THEME (Developer Optimized)
+   ======================================== */
+
+/* Core Colors - Dark Native */
+:root {
+  /* Primary Brand Colors - CYAN */
+  --color-primary:     #22d3ee;  /* Cyan 400 - Charts, Actions */
+  --color-primary-400: #38bdf8;  /* Sky 400 - Lighter */
+  --color-primary-600: #06b6d4;  /* Cyan 500 - Darker */
+  
+  /* Secondary Brand Colors - MAGENTA */
+  --color-secondary:   #ec4899;  /* Pink 500 - Warnings, Accents */
+  --color-secondary-500: #f472b6; /* Pink 400 - Standard */
+  --color-secondary-600: #db2777; /* Pink 600 - Darker */
+  
+  /* Neutrals (Dark Optimized) */
+  --color-neutral-900: #f8fafc;  /* Near-white - Headings, Code */
+  --color-neutral-700: #e2e8f0;  /* Light gray - Text */
+  --color-neutral-600: #cbd5e1;  /* Medium gray - Subtle text */
+  --color-neutral-500: #94a3b8;  /* Labels */
+  
+  /* PREMIUM DARK BACKGROUNDS */
+  --color-bg-primary:  #0a0e17;  /* Deep Space Black */
+  --color-bg-surface:  #111827;   /* Carbon Black */
+  --color-bg-secondary: #1f2937;  /* Dark Slate */
+  
+  /* Glassmorphism (Dark) */
+  --glass-bg:          rgba(31, 41, 55, 0.7);
+  --glass-border:      rgba(255, 255, 255, 0.12);
+  --glass-shadow:      rgba(0, 0, 0, 0.5);
+  
+  /* Status Colors */
+  --color-success:     #10b981;
+  --color-warning:     #f59e0b;
+  --color-error:       #ef4444;
+}
+
+/* Light Mode (Optional) */
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-bg-primary:  #f8fafc;
+    --color-bg-surface:  #ffffff;
+    --color-bg-secondary: #f1f5f9;
+    --glass-bg:          rgba(255, 255, 255, 0.4);
+    --glass-border:      rgba(255, 255, 255, 0.3);
+    --color-neutral-900: #1e293b;
+    --color-neutral-700: #475569;
+  }
+}
+
+/* Reset & Base */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: 
+    radial-gradient(ellipse at top left, rgba(34, 211, 238, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom right, rgba(236, 72, 153, 0.12) 0%, transparent 50%),
+    linear-gradient(135deg, var(--color-bg-primary) 0%, #0d1117 50%, #0a0e17 100%);
+  min-height: 100vh;
+  line-height: 1.6;
+  color: var(--color-neutral-700);
+}
+
+/* Container */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Hero Section */
+.hero {
+  padding: 5rem 0 3rem;
+  text-align: center;
+  flex: 1;
+}
+
+.hero-title {
+  font-size: clamp(3rem, 10vw, 6rem);
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.hero-title span {
+  display: block;
+}
+
+.hero-title span:first-child {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-400));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-title span:last-child {
+  background: linear-gradient(135deg, var(--color-secondary), var(--color-secondary-500));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.2rem, 4vw, 1.6rem);
+  color: var(--color-neutral-600);
+  font-weight: 400;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Cards Grid */
+.cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin: 4rem 0 5rem;
+}
+
+@media (min-width: 768px) {
+  .cards-grid {
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 3rem;
+  }
+}
+
+/* Card Styles - Premium Dark Glass */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  padding: 3rem 2.5rem;
+  border-radius: 28px;
+  backdrop-filter: blur(30px);
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 260px;
+  box-shadow: 
+    0 25px 50px var(--glass-shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.chart-card {
+  background-image: 
+    radial-gradient(circle at 20% 20%, var(--color-primary-400) 0%, transparent 50%);
+}
+
+.converter-card {
+  background-image: 
+    radial-gradient(circle at 80% 80%, var(--color-secondary-500) 0%, transparent 50%);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 28px;
+  padding: 2px;
+  background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -1;
+}
+
+.card:hover::before { opacity: 1; }
+
+.card:hover {
+  transform: translateY(-20px) scale(1.03);
+  box-shadow: 
+    0 50px 100px color-mix(in srgb, var(--glass-shadow) 80%, black),
+    0 0 0 1px rgba(255, 255, 255, 0.15),
+    0 0 30px rgba(34, 211, 238, 0.2);
+}
+
+.card:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.card-icon {
+  font-size: clamp(4rem, 12vw, 6rem);
+  margin-bottom: 1.5rem;
+  filter: drop-shadow(0 8px 20px rgba(34, 211, 238, 0.4));
+}
+
+.card h2 {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--color-neutral-900);
+  margin-bottom: 1rem;
+}
+
+.card p {
+  color: var(--color-neutral-600);
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: auto;
+}
+
+.card-arrow {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  font-size: 2.5rem;
+  font-weight: 300;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.4s ease;
+}
+
+.chart-card .card-arrow { color: var(--color-primary); }
+.converter-card .card-arrow { color: var(--color-secondary); }
+
+.card:hover .card-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 2.5rem 0;
+  color: var(--color-neutral-500);
+  font-size: 1rem;
+  border-top: 1px solid var(--glass-border);
+  margin-top: auto;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .container { padding: 0 1rem; }
+  .hero { padding: 3rem 0 2rem; }
+  .card { padding: 2.5rem 2rem; }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .card, .card-arrow { transition: none; }
+}
