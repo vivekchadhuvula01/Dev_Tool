@@ -276,8 +276,8 @@ function generateChart() {
     legend: {
       show: true,
       position: "bottom",
-      horizontalAlign: "left",
-      floating: false,
+      horizontalAlign: "center",
+      floating: true,
       offsetY: 8,
       fontSize: "12px",
       labels: {
@@ -298,7 +298,7 @@ function generateChart() {
       padding: {
         top: 20,    // Reserve space for legend
         right: 10,
-        bottom: 80,
+        bottom: 70,
         left: 10,
       },
     },
@@ -352,8 +352,8 @@ function generateChart() {
   if (chart) {
     chart.destroy();
   }
-  $("chart").innerHTML = "";
-  chart = new ApexCharts($("chart"), options);
+$("chart").innerHTML = '<div id="chart-render"></div>';
+chart = new ApexCharts(document.getElementById("chart-render"), options);
   chart.render();
 }
 
