@@ -228,23 +228,18 @@ function generateChart() {
       }
     });
   }
-  // Shorten long column names for legend
-const shortYCols = yCols.map(name => {
-  if (name.length > 15) {
-    return name.length > 25 ? name.substring(0, 12) + "..." : name.substring(0, 15);
-  }
-  return name;
-});
 
-const series = yCols.map((col, idx) => ({
-  name: shortYCols[idx],
-  data: seriesMap[col],
-}));
+  // FIXED: Single series definition with shortened names
+  const shortYCols = yCols.map(name => {
+    if (name.length > 15) {
+      return name.length > 25 ? name.substring(0, 12) + "..." : name.substring(0, 15);
+    }
+    return name;
+  });
 
-
-  const series = yCols.map((c) => ({
-    name: c,
-    data: seriesMap[c],
+  const series = yCols.map((col, idx) => ({
+    name: shortYCols[idx],  // Shortened name
+    data: seriesMap[col],
   }));
 
   if (!series.length || !xValues.length) {
@@ -252,102 +247,114 @@ const series = yCols.map((col, idx) => ({
     return;
   }
 
-const options = {
-  chart: {
-    type,
-    height: 420, // Extra height for legend
-    toolbar: {
-      show: true,
-      tools: {
-        download: true,
-        selection: true,
-        zoom: true,
-        zoomin: true,
-        zoomout: true,
-        pan: true,
-        reset: true,
+  const options = {
+    chart: {
+      type,
+      height: 450,  // Increased for legend space
+      toolbar: {
+        show: true,
+        position: "right",
+        tools: {
+          download: true,
+          selection: true,
+          zoom: true,
+          zoomin: true,
+          zoomout: true,
+          pan: true,
+          reset: true,
+        },
       },
-    },
-    foreColor: "#e5e7eb",
-    background: "transparent",
-    fontFamily: "Inter, sans-serif",
-  },
-  theme: {
-    mode: "dark",
-    palette: "palette2",
-  },
-  colors: ["#22d3ee", "#ec4899", "#f59e0b", "#10b981", "#8b5cf6", "#ef4444", "#f97316", "#14b8a6"],
-  legend: {
-    position: "top",
-    horizontalAlign: "left",
-    floating: false,
-    fontSize: "12px",
-    labels: {
-      colors: "#e5e7eb",
-    },
-    markers: {
-      width: 12,
-      height: 12,
-      radius: 2,
-    },
-    itemMargin: {
-      horizontal: 8,
-      vertical: 2,
-    },
-    fontFamily: "Inter, sans-serif",
-  },
-  xaxis: {
-    labels: {
-      style: {
-        colors: "#9ca3af",
-        fontSize: "12px",
-        fontFamily: "Inter, sans-serif",
-      },
-    },
-    title: {
-      text: xCol,
-      style: {
-        color: "#d1d5db",
-        fontSize: "14px",
-        fontWeight: 600,
-      },
-    },
-  },
-  yaxis: {
-    labels: {
-      style: {
-        colors: "#9ca3af",
-        fontSize: "12px",
-        fontFamily: "Inter, sans-serif",
-      },
-    },
-  },
-  stroke: {
-    curve: type === "line" || type === "area" ? "smooth" : "straight",
-    width: 2,
-  },
-  dataLabels: {
-    enabled: false,
-  },
-  tooltip: {
-    theme: "dark",
-    shared: true,
-    intersect: false,
-    style: {
+      foreColor: "#e5e7eb",
+      background: "transparent",
       fontFamily: "Inter, sans-serif",
     },
-  },
-  series,
-};
+    theme: {
+      mode: "dark",
+      palette: "palette2",
+    },
+    colors: ["#22d3ee", "#ec4899", "#f59e0b", "#10b981", "#8b5cf6", "#ef4444", "#f97316", "#14b8a6"],
+    legend: {
+      show: true,
+      position: "top",
+      horizontalAlign: "left",
+      floating: false,
+      offsetY: -10,
+      fontSize: "12px",
+      labels: {
+        colors: "#e5e7eb",
+      },
+      markers: {
+        width: 10,
+        height: 10,
+        radius: 2,
+      },
+      itemMargin: {
+        horizontal: 12,
+        vertical: 2,
+      },
+      fontFamily: "Inter, sans-serif",
+    },
+    grid: {
+      padding: {
+        top: 50,    // Reserve space for legend
+        right: 10,
+        bottom: 20,
+        left: 10,
+      },
+    },
+    xaxis: {
+      type: treatAsNumber ? "numeric" : "category",
+      categories: xValues,
+      labels: {
+        style: {
+          colors: "#9ca3af",
+          fontSize: "11px",
+          fontFamily: "Inter, sans-serif",
+        },
+      },
+      title: {
+        text: xCol,
+        style: {
+          color: "#d1d5db",
+          fontSize: "13px",
+          fontWeight: 600,
+        },
+      },
+    },
+    yaxis: {
+      labels: {
+        style: {
+          colors: "#9ca3af",
+          fontSize: "11px",
+          fontFamily: "Inter, sans-serif",
+        },
+      },
+    },
+    stroke: {
+      curve: type === "line" || type === "area" ? "smooth" : "straight",
+      width: 2,
+    },
+    dataLabels: {
+      enabled: false,
+    },
+    tooltip: {
+      theme: "dark",
+      shared: true,
+      intersect: false,
+      style: {
+        fontFamily: "Inter, sans-serif",
+      },
+    },
+    series,
+  };
 
-
+  // Destroy and recreate chart to avoid state issues
   if (chart) {
-    chart.updateOptions(options, true, true);
-  } else {
-    $("chart").innerHTML = "";
-    chart = new ApexCharts($("chart"), options);
-    chart.render();
+    chart.destroy();
   }
+  $("chart").innerHTML = "";
+  chart = new ApexCharts($("chart"), options);
+  chart.render();
 }
 
 window.addEventListener("DOMContentLoaded", init);
