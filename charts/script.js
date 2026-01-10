@@ -228,6 +228,19 @@ function generateChart() {
       }
     });
   }
+  // Shorten long column names for legend
+const shortYCols = yCols.map(name => {
+  if (name.length > 15) {
+    return name.length > 25 ? name.substring(0, 12) + "..." : name.substring(0, 15);
+  }
+  return name;
+});
+
+const series = yCols.map((col, idx) => ({
+  name: shortYCols[idx],
+  data: seriesMap[col],
+}));
+
 
   const series = yCols.map((c) => ({
     name: c,
@@ -239,10 +252,10 @@ function generateChart() {
     return;
   }
 
- const options = {
+const options = {
   chart: {
     type,
-    height: 380,
+    height: 420, // Extra height for legend
     toolbar: {
       show: true,
       tools: {
@@ -264,6 +277,25 @@ function generateChart() {
     palette: "palette2",
   },
   colors: ["#22d3ee", "#ec4899", "#f59e0b", "#10b981", "#8b5cf6", "#ef4444", "#f97316", "#14b8a6"],
+  legend: {
+    position: "top",
+    horizontalAlign: "left",
+    floating: false,
+    fontSize: "12px",
+    labels: {
+      colors: "#e5e7eb",
+    },
+    markers: {
+      width: 12,
+      height: 12,
+      radius: 2,
+    },
+    itemMargin: {
+      horizontal: 8,
+      vertical: 2,
+    },
+    fontFamily: "Inter, sans-serif",
+  },
   xaxis: {
     labels: {
       style: {
@@ -289,13 +321,6 @@ function generateChart() {
         fontFamily: "Inter, sans-serif",
       },
     },
-  },
-  legend: {
-    labels: {
-      colors: "#e5e7eb",
-    },
-    fontFamily: "Inter, sans-serif",
-    position: "top",
   },
   stroke: {
     curve: type === "line" || type === "area" ? "smooth" : "straight",
