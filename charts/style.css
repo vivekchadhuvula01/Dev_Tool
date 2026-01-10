@@ -358,4 +358,26 @@ body {
   background: #374151 !important;
   color: #f9fafb !important;
 }
+/* Fix legend collision */
+.apexcharts-legend {
+  padding: 8px 0 !important;
+  margin-bottom: 12px !important;
+}
+
+.apexcharts-legend-series {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px;
+}
+
+.apexcharts-legend-text {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+}
+
+/* Chart padding */
+.apexcharts-plot {
+  padding: 0 12px 24px 12px !important;
+}
 
