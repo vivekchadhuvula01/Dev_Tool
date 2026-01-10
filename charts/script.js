@@ -239,62 +239,82 @@ function generateChart() {
     return;
   }
 
-  const options = {
-    chart: {
-      type,
-      height: 380,
-      toolbar: {
-        show: true,
-        tools: {
-          download: true,
-          selection: true,
-          zoom: true,
-          zoomin: true,
-          zoomout: true,
-          pan: true,
-          reset: true,
-        },
-      },
-      foreColor: "#e5e7eb",
-      background: "transparent",
-    },
-    theme: {
-      mode: "dark",
-      palette: "palette1",
-    },
-    xaxis: {
-      type: treatAsNumber ? "numeric" : "category",
-      categories: xValues,
-      labels: {
-        style: {
-          colors: "#9ca3af",
-        },
-      },
-      title: {
-        text: xCol,
+ const options = {
+  chart: {
+    type,
+    height: 380,
+    toolbar: {
+      show: true,
+      tools: {
+        download: true,
+        selection: true,
+        zoom: true,
+        zoomin: true,
+        zoomout: true,
+        pan: true,
+        reset: true,
       },
     },
-    yaxis: {
-      labels: {
-        style: {
-          colors: "#9ca3af",
-        },
+    foreColor: "#e5e7eb",
+    background: "transparent",
+    fontFamily: "Inter, sans-serif",
+  },
+  theme: {
+    mode: "dark",
+    palette: "palette2",
+  },
+  colors: ["#22d3ee", "#ec4899", "#f59e0b", "#10b981", "#8b5cf6", "#ef4444", "#f97316", "#14b8a6"],
+  xaxis: {
+    labels: {
+      style: {
+        colors: "#9ca3af",
+        fontSize: "12px",
+        fontFamily: "Inter, sans-serif",
       },
     },
-    legend: {
-      labels: {
-        colors: "#e5e7eb",
+    title: {
+      text: xCol,
+      style: {
+        color: "#d1d5db",
+        fontSize: "14px",
+        fontWeight: 600,
       },
     },
-    stroke: {
-      curve: type === "line" || type === "area" ? "smooth" : "straight",
-      width: 2,
+  },
+  yaxis: {
+    labels: {
+      style: {
+        colors: "#9ca3af",
+        fontSize: "12px",
+        fontFamily: "Inter, sans-serif",
+      },
     },
-    dataLabels: {
-      enabled: false,
+  },
+  legend: {
+    labels: {
+      colors: "#e5e7eb",
     },
-    series,
-  };
+    fontFamily: "Inter, sans-serif",
+    position: "top",
+  },
+  stroke: {
+    curve: type === "line" || type === "area" ? "smooth" : "straight",
+    width: 2,
+  },
+  dataLabels: {
+    enabled: false,
+  },
+  tooltip: {
+    theme: "dark",
+    shared: true,
+    intersect: false,
+    style: {
+      fontFamily: "Inter, sans-serif",
+    },
+  },
+  series,
+};
+
 
   if (chart) {
     chart.updateOptions(options, true, true);
