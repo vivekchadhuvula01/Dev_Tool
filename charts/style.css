@@ -381,3 +381,30 @@ body {
   padding: 0 12px 24px 12px !important;
 }
 
+/* FORCE Legend to bottom - highest specificity */
+.apexcharts-legend {
+  position: absolute !important;
+  bottom: 10px !important;
+  top: auto !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 90% !important;
+  padding: 8px 12px !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 12px !important;
+}
+
+.apexcharts-legend-series {
+  white-space: nowrap !important;
+  max-width: 140px !important;
+  text-overflow: ellipsis !important;
+}
+
+.apexcharts-legend-text {
+  color: #e5e7eb !important;
+  font-size: 12px !important;
+  font-family: "Inter", sans-serif !important;
+}
+
