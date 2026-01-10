@@ -250,7 +250,7 @@ function generateChart() {
   const options = {
     chart: {
       type,
-      height: 450,  // Increased for legend space
+      height: 420,  // back to normal
       toolbar: {
         show: true,
         position: "right",
@@ -275,10 +275,10 @@ function generateChart() {
     colors: ["#22d3ee", "#ec4899", "#f59e0b", "#10b981", "#8b5cf6", "#ef4444", "#f97316", "#14b8a6"],
     legend: {
       show: true,
-      position: "top",
+      position: "bottom",
       horizontalAlign: "left",
       floating: false,
-      offsetY: -10,
+      offsetY: 8,
       fontSize: "12px",
       labels: {
         colors: "#e5e7eb",
@@ -290,15 +290,15 @@ function generateChart() {
       },
       itemMargin: {
         horizontal: 12,
-        vertical: 2,
+        vertical: 4,
       },
       fontFamily: "Inter, sans-serif",
     },
     grid: {
       padding: {
-        top: 50,    // Reserve space for legend
+        top: 20,    // Reserve space for legend
         right: 10,
-        bottom: 20,
+        bottom: 80,
         left: 10,
       },
     },
